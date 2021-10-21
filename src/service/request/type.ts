@@ -1,12 +1,12 @@
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 
-export interface XCRequestInterceptors {
+export interface XCRequestInterceptors<T = AxiosResponse> {
     requestInterceptor?: (config: AxiosRequestConfig) => AxiosRequestConfig
     requestInterceptorCatch?: (error: any) => any
-    responseInterceptor?: (res: AxiosResponse) => AxiosResponse
+    responseInterceptor?: (res: T) => T
     responseInterceptorCatch?: (error: any) => any
 }
 
-export interface XCRequestConfig extends AxiosRequestConfig {
-    interceptors?: XCRequestInterceptors
+export interface XCRequestConfig<T = AxiosResponse> extends AxiosRequestConfig {
+    interceptors?: XCRequestInterceptors<T>
 }

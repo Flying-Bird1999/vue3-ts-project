@@ -17,22 +17,32 @@ app.mount("#app")
 // console.log(process.env.VUE_APP_BASE_URL)
 // console.log(process.env.VUE_APP_BASE_NAME)
 
-xcRequest.request({
-    url: '/home/multidata',
-    method: 'GET',
-    interceptors: {
-        requestInterceptor: (config) => {
-            console.log('单独请求的config')
-            return config
-        },
-        responseInterceptor: (res) => {
-            console.log('单独响应的response')
-            return res
-        }
-    }
-})
-
 // xcRequest.request({
 //     url: '/home/multidata',
-//     method: 'GET'
+//     method: 'GET',
+//     interceptors: {
+//         requestInterceptor: (config) => {
+//             console.log('单独请求的config')
+//             return config
+//         },
+//         responseInterceptor: (res) => {
+//             console.log('单独响应的response')
+//             return res
+//         }
+//     }
 // })
+
+interface DataType {
+    data: any
+    returnCode: string
+    success: boolean
+}
+
+xcRequest.get<DataType>({
+    url: '/home/multidata'
+}).then(res => {
+    console.log(123)
+    console.log(res.data)
+    console.log(res.returnCode)
+    console.log(res.success)
+})
