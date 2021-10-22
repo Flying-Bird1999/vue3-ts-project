@@ -1,5 +1,8 @@
 import { createApp } from "vue"
 import { globalRegister } from "./global"
+import 'normalize.css'
+import './assets/css/index.less'
+
 import xcRequest from "./service"
 
 import App from "./App.vue"
@@ -32,17 +35,17 @@ app.mount("#app")
 //     }
 // })
 
-interface DataType {
-    data: any
-    returnCode: string
-    success: boolean
-}
+// interface DataType {
+//     data: any
+//     returnCode: string
+//     success: boolean
+// }
 
-xcRequest.get<DataType>({
-    url: '/home/multidata'
-}).then(res => {
-    console.log(123)
-    console.log(res.data)
-    console.log(res.returnCode)
-    console.log(res.success)
-})
+// xcRequest.get<DataType>({
+//     url: '/home/multidata'
+// }).then(res => {
+//     console.log(123)
+//     console.log(res.data)
+//     console.log(res.returnCode)
+//     console.log(res.success)
+// })

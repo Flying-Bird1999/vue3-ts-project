@@ -1,10 +1,5 @@
 <template>
-    <router-link to='/login'>登陆</router-link>
-    <router-link to='/main'>首页</router-link>
     <router-view></router-view>
-    <el-button>hahaha</el-button>
-    <el-button type="primary">hahaha</el-button>
-    <el-button type="mini">hahaha</el-button>
 </template>
 
 <script lang="ts">
@@ -16,5 +11,7 @@
 </script>
 
 <style lang="less">
-
+    .app {
+        height: 100%;
+    }
 </style>
