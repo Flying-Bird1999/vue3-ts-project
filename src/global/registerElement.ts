@@ -1,25 +1,43 @@
 import { App } from 'vue'
 import 'element-plus/lib/theme-chalk/index.css'
 import { 
-    ElButton, 
-    ElForm, 
-    ElInput,
-    ElTabPane,
-    ElTabs,
-    ElFormItem,
+    ElAside,
+    ElButton,
     ElCheckbox,
-    ElLink
+    ElContainer,
+    ElForm,
+    ElFormItem,
+    ElHeader,
+    ElInput,
+    ElLink,
+    ElMain,
+    ElMenu,
+    ElMenuItem,
+    ElMenuItemGroup,
+    ElRadio,
+    ElSubmenu,
+    ElTabPane,
+    ElTabs
 } from "element-plus"
 
 const components = [
-    ElButton, 
-    ElForm, 
-    ElInput,
-    ElTabPane,
-    ElTabs,
+    ElButton,
+    ElForm,
     ElFormItem,
+    ElInput,
+    ElRadio,
+    ElTabs,
+    ElTabPane,
     ElCheckbox,
-    ElLink
+    ElLink,
+    ElContainer,
+    ElHeader,
+    ElMain,
+    ElAside,
+    ElMenu,
+    ElMenuItem,
+    ElMenuItemGroup,
+    ElSubmenu
 ]
 
 export default function (app: App): void {
