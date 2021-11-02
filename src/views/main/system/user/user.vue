@@ -1,17 +1,26 @@
 <template>
-  <div class="user">
-    <h2>user</h2>
-  </div>
+    <div class="user">
+        <xc-Form v-bind="searchFormConfig" />
+        <div class="content">
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import XcForm from '@/base-ui/form'
+import { searchFormConfig } from './config/search.config'
 
 export default defineComponent({
-  name: 'user',
-  setup() {
-    return {}
-  }
+    components: {
+        XcForm
+    },
+    name: 'user',
+    setup() {
+        return {
+            searchFormConfig
+        }
+    }
 })
 </script>
 

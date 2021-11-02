@@ -35,6 +35,8 @@ router.beforeEach((to) => {
         if(!token) {
             return '/login'
         }
+        
+
     }
 })
 
