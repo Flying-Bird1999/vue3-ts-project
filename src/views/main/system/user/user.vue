@@ -1,13 +1,13 @@
 <template>
     <div class="user">
-        <xc-Form v-bind="searchFormConfig" />
+        <xc-Form v-bind="searchFormConfig" v-model='formData' />
         <div class="content">
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import XcForm from '@/base-ui/form'
 import { searchFormConfig } from './config/search.config'
 
@@ -17,8 +17,17 @@ export default defineComponent({
     },
     name: 'user',
     setup() {
+        const formData = ref({
+            id: '',
+            name: '',
+            password: '',
+            sport: '',
+            createTime: ''
+        })
+
         return {
-            searchFormConfig
+            searchFormConfig,
+            formData
         }
     }
 })
