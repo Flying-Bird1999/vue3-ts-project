@@ -1,6 +1,7 @@
 import xcRequest from "../index";
 
-import { IAccoont, IDataType, ILoginResult } from './type'
+import { IAccoont, ILoginResult } from './type'
+import { IDataType } from '../types'
 
 enum loginAPI {
     AccountLogin = '/login',

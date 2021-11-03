@@ -49,7 +49,7 @@ class XCRequest {
         })
 
     }
-    request<T>(config: XCRequestConfig<T>): Promise<T>{
+    request<T=any>(config: XCRequestConfig<T>): Promise<T>{
         return new Promise((resolve, reject) => {
             if(config.interceptors?.requestInterceptor) {
                 config = config.interceptors.requestInterceptor(config)
@@ -68,19 +68,19 @@ class XCRequest {
         })
     }
 
-    get<T>(config: XCRequestConfig<T>): Promise<T> {
+    get<T=any>(config: XCRequestConfig<T>): Promise<T> {
         return this.request<T>({...config, method: 'GET'})
     }
 
-    post<T>(config: XCRequestConfig<T>): Promise<T> {
+    post<T=any>(config: XCRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: 'POST' })
     }
 
-    delete<T>(config: XCRequestConfig<T>): Promise<T> {
+    delete<T=any>(config: XCRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: 'DELETE' })
     }
 
-    patch<T>(config: XCRequestConfig<T>): Promise<T> {
+    patch<T=any>(config: XCRequestConfig<T>): Promise<T> {
         return this.request<T>({ ...config, method: 'PATCH' })
     }
 }

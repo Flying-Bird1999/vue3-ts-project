@@ -52,5 +52,4 @@ export default defineComponent({
         text-align: right;
         padding: 0 50px 20px 0;
     }
-
 </style>
