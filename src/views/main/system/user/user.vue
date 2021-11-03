@@ -1,36 +1,29 @@
 <template>
     <div class="user">
-        <xc-Form v-bind="searchFormConfig" v-model='formData' />
-        <div class="content">
-        </div>
+        <page-search :searchFormConfig="searchFormConfig" />
+        <div class="content"></div>
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import XcForm from '@/base-ui/form'
+import PageSearch from '@/components/page-search'
+
 import { searchFormConfig } from './config/search.config'
 
 export default defineComponent({
-    components: {
-        XcForm
-    },
     name: 'user',
+    components: {
+        PageSearch
+    },
     setup() {
-        const formData = ref({
-            id: '',
-            name: '',
-            password: '',
-            sport: '',
-            createTime: ''
-        })
-
         return {
-            searchFormConfig,
-            formData
+            searchFormConfig
         }
     }
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+    
+</style>
