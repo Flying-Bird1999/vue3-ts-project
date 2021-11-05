@@ -1,6 +1,11 @@
 <template>
     <div class="page-content">
-        <xc-table :listData='dataList' v-bind="contentTableConfig">
+        <xc-table 
+            :listData='dataList' 
+            :listCount='dataCount' 
+            v-bind="contentTableConfig"
+            v-model:page="pageInfo"
+        >
             <!-- header中的插槽 -->
             <!-- <template #header>
                 <h2>hahah</h2>
@@ -32,7 +37,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref, watch } from 'vue'
 import { useStore } from '@/store'
 
 import XcTable from '@/base-ui/table'
@@ -54,13 +59,17 @@ export default defineComponent({
     setup(props) {
         const store = useStore()
 
+        // 双向绑定pageInfo
+        const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+        watch(pageInfo, () => getPageData())
+
         // 发送网络请求
         const getPageData = (queryInfo: any = []) => {
             store.dispatch('system/getPageListAction', {
                 pageName: props.pageName,
                 queryInfo: {
-                    offset: 0,
-                    size: 10,
+                    offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+                    size: pageInfo.value.pageSize,
                     ...queryInfo
                 }
             })
@@ -71,9 +80,16 @@ export default defineComponent({
         const dataList = computed(() => {
             return store.getters[`system/pageListData`](props.pageName)
         })
+        const dataCount = computed(() => {
+            return store.getters[`system/pageCountData`](props.pageName)
+        })
+
+
         return {
             dataList,
-            getPageData
+            dataCount,
+            getPageData,
+            pageInfo
         }
     }
 });
