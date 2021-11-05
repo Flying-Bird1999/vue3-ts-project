@@ -7,17 +7,14 @@
             v-model:page="pageInfo"
         >
             <!-- header中的插槽 -->
-            <!-- <template #header>
-                <h2>hahah</h2>
-            </template> -->
             <template #header-handler>
                 <el-button type="primary" size="medium">新建用户</el-button>
             </template>
 
-            <!-- 列中的插槽 -->
+            <!-- 列中固定的插槽 -->
             <template #status='scope'>
                 <el-button plain size="mini" :type="scope.enable?'danger':'success'">
-                    {{ scope.row.enable ? '启用' : '禁用' }}
+                    {{ !scope.row.enable ? '启用' : '禁用' }}
                 </el-button>
             </template>
             <template #createAt="scope">
@@ -32,6 +29,18 @@
                     <el-button icon="el-icon-delete" size="mini" type="text">删除</el-button>
                 </div>
             </template>
+
+            <!-- 动态插槽 -->
+            <template 
+                v-for="item in otherPropSlots" 
+                :key="item.prop" 
+                #[item.slotName]="scope"
+            >
+                <template v-if="item.slotName">
+                    <slot :name="item.slotName" :row="scope.row"></slot>
+                </template>
+            </template>
+            
         </xc-table>
     </div>
 </template>
@@ -84,12 +93,22 @@ export default defineComponent({
             return store.getters[`system/pageCountData`](props.pageName)
         })
 
+        // 获取其他的动态插槽名称
+        const otherPropSlots = props.contentTableConfig?.propList.filter((item: any) => {
+            if(item.slotName === 'status') return false;
+            if(item.slotName === 'createAt') return false;
+            if(item.slotName === 'updateAt') return false;
+            if(item.slotName === 'handler') return false;
+            return true
+        })
+
 
         return {
             dataList,
             dataCount,
             getPageData,
-            pageInfo
+            pageInfo,
+            otherPropSlots
         }
     }
 });
