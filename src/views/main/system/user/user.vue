@@ -13,6 +13,7 @@
             @editBtnClick="handleEditData"
         />
         <page-modal
+            pageName="users" 
             ref="pageModalRef"
             :defaultInfo='defaultInfo'
             :modalConfig="modalConfigRef"
