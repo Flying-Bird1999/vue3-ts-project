@@ -2,7 +2,7 @@ import { Module } from 'vuex'
 
 import { accountLoginRequest, requestUserInfoById, requestUserMenuByRoleId } from '@/service/login/login'
 import localCache from '@/utils/cache'
-import { mapMenusToRoutes } from '@/utils/map-menus'
+import { mapMenusToRoutes, mapMenustoPermissions } from '@/utils/map-menus'
 import router from '@/router'
 
 import { IAccoont } from '@/service/login/type'
@@ -15,7 +15,8 @@ const loginModule: Module<ILoginState, IRootState> = {
         return {
             token: '',
             userInfo: {},
-            userMenus: {}
+            userMenus: {},
+            permissions: []
         }
     },
     getters: {},
@@ -76,6 +77,9 @@ const loginModule: Module<ILoginState, IRootState> = {
                 router.addRoute('main', route)
             })
 
+            // 获取用户按钮权限
+            const permissions = mapMenustoPermissions(userMenus)
+            state.permissions = permissions
         }
     }
 }
