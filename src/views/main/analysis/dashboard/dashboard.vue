@@ -7,7 +7,9 @@
                 </xc-card>
             </el-col>
             <el-col :span="10">
-                <xc-card title="不同城市商品销量"></xc-card>
+                <xc-card title="不同城市商品销量">
+                    <map-echart :mapData="addressGoodsSale"></map-echart>
+                </xc-card>
             </el-col>
             <el-col :span="7">
                 <xc-card title="分类商品数量(玫瑰图)">
@@ -36,7 +38,7 @@ import { computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 
 import XcCard from '@/base-ui/card'
-import { PieEchart, RoseEchart, LineEchart, BarEchart } from '@/components/page-echarts'
+import { PieEchart, RoseEchart, LineEchart, BarEchart, MapEchart } from '@/components/page-echarts'
 
 export default defineComponent({
     name: 'dashboard',
@@ -45,7 +47,8 @@ export default defineComponent({
         PieEchart,
         RoseEchart,
         LineEchart,
-        BarEchart
+        BarEchart,
+        MapEchart
     },
     setup() {
         const store = useStore()
@@ -58,7 +61,7 @@ export default defineComponent({
                 return {name: item.name, value: item.goodsCount}
             })
         })
-        
+
         const categoryGoodsSale = computed(() => {
             const xLabels: string[] = []
             const values: any[] = []
@@ -81,10 +84,17 @@ export default defineComponent({
             return { xLabels, values }
         })
 
+        const addressGoodsSale = computed(() => {
+            return store.state.dashboard.addressGoodsSale.map((item: any) => {
+                return { name: item.address, value: item.count }
+            })
+        })
+
         return {
             categoryGoodsCount,
             categoryGoodsSale,
-            categoryGoodsFavor
+            categoryGoodsFavor,
+            addressGoodsSale
         }
     }
 })
